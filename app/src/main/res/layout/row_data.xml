@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="56dp">
+
+    <ImageView
+        android:id="@+id/sun"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitStart"
+        android:src="@drawable/thousandssunny"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="start|center_vertical"
+        android:paddingLeft="50dp"
+        android:text="date" />
+
+    <TextView
+        android:id="@+id/sunrise"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="12dp"
+        android:paddingTop="6dp"
+        android:text="@string/sunrise"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/sunset"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="12dp"
+        android:paddingTop="25dp"
+        android:text="@string/sunset"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/temp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="115dp"
+        android:text="@string/temp" />
+
+    <TextView
+        android:id="@+id/tempHigh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="115dp"
+        android:paddingTop="25dp"
+        android:text="@string/tempHigh" />
+
+    <TextView
+        android:id="@+id/tempLow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="195dp"
+        android:paddingTop="25dp"
+        android:text="@string/tempLow" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
