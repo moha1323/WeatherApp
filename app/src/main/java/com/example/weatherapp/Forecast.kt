@@ -1,5 +1,5 @@
 package com.example.weatherapp
 
 data class Forecast(
-    val list : List<DayForecast>
+    val list: List<DayForecast>
 )

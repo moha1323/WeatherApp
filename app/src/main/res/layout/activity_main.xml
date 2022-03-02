@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/city_name"
+        android:id="@+id/cityName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -28,10 +28,10 @@
         android:textColor="@color/black"
         android:textSize="72sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/city_name" />
+        app:layout_constraintTop_toBottomOf="@id/cityName" />
 
     <ImageView
-        android:id="@+id/weather_icon"
+        android:id="@+id/weatherIcon"
         android:layout_width="67dp"
         android:layout_height="67dp"
         android:scaleType="center"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toTopOf="@id/temperature" />
 
     <TextView
-        android:id="@+id/feels_like"
+        android:id="@+id/feelsLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/feels_like"
@@ -60,7 +60,7 @@
         android:textColor="@color/black"
         android:textSize="17dp"
         app:layout_constraintStart_toStartOf="@id/temperature"
-        app:layout_constraintTop_toBottomOf="@id/feels_like" />
+        app:layout_constraintTop_toBottomOf="@id/feelsLike" />
 
     <TextView
         android:id="@+id/high"
