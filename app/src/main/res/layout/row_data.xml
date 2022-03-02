@@ -6,7 +6,7 @@
     android:layout_height="56dp">
 
     <ImageView
-        android:id="@+id/sun"
+        android:id="@+id/forecast_icon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitStart"
@@ -20,7 +20,8 @@
         android:layout_height="match_parent"
         android:gravity="start|center_vertical"
         android:paddingLeft="50dp"
-        android:text="date" />
+        android:text="date"
+        tools:text = "date"/>
 
     <TextView
         android:id="@+id/sunrise"
