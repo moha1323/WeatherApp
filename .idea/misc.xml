@@ -4,8 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_forecast.xml" value="0.387037037037037" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.39420379472843864" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="app/src/main/res/layout/forecast.xml" value="0.20153985507246377" />
+        <entry key="app/src/main/res/layout/fragment_current_conditions.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_current_conditions3.xml" value="0.21875" />
+        <entry key="app/src/main/res/layout/fragment_forecast.xml" value="0.1526268115942029" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.22" />
         <entry key="app/src/main/res/layout/row_data.xml" value="0.33" />
       </map>
     </option>

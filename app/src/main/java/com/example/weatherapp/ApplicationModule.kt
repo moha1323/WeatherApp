@@ -26,4 +26,5 @@ object ApplicationModule {
 
         return retrofit.create(Api::class.java)
     }
+
 }
