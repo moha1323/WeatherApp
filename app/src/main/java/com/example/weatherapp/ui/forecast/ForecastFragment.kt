@@ -6,6 +6,7 @@ import android.view.View
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.databinding.FragmentForecastBinding
+import com.example.weatherapp.model.Forecast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -26,7 +27,11 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
         viewModel.forecast.observe(this) { forecast ->
             bindData(forecast)
         }
-        viewModel.loadData(args.zipCode)
+        if(args.zipCode.length == 5 && args.zipCode.all { it.isDigit() }) {
+            viewModel.loadData(args.zipCode)
+        } else {
+            viewModel.loadData(args.latitude, args.longitude)
+        }
     }
 
     private fun bindData(forecast: Forecast) {
