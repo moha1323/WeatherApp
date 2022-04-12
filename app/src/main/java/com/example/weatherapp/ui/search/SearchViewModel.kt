@@ -1,14 +1,8 @@
-package com.example.weatherapp
+package com.example.weatherapp.ui.search
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.location.Location
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.tasks.Task
 
 class SearchViewModel : ViewModel() {
     private var zipCode: String? = null

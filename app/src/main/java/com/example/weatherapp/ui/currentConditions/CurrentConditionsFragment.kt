@@ -1,4 +1,4 @@
-package com.example.weatherapp
+package com.example.weatherapp.ui.currentConditions
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -8,6 +8,8 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.weatherapp.ui.dialog.ErrorDialogFragment
+import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentCurrentConditionsBinding
 import com.example.weatherapp.model.CurrentConditions
 import dagger.hilt.android.AndroidEntryPoint

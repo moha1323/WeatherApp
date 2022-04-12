@@ -1,4 +1,4 @@
-package com.example.weatherapp
+package com.example.weatherapp.ui.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
+import com.example.weatherapp.R
 
 class ErrorDialogFragment: DialogFragment() {
 

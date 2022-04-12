@@ -1,4 +1,4 @@
-package com.example.weatherapp
+package com.example.weatherapp.ui.search
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -6,7 +6,6 @@ import android.app.AlertDialog
 import android.content.ContentValues.TAG
 import android.content.DialogInterface
 import android.content.pm.PackageManager
-import android.location.LocationRequest
 import android.os.Bundle
 import android.os.Looper
 import android.text.Editable
@@ -17,6 +16,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.navigation.fragment.findNavController
+import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentSearchBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
