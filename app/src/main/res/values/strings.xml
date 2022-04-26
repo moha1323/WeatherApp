@@ -19,4 +19,7 @@
     <string name="zip_code" />
     <string name="search">Search</string>
     <string name="ok">OK</string>
+    <string name="location">Use My Location</string>
+    <string name="latitude">"Latitude: "</string>
+    <string name="longitude">"Longitude: "</string>
 </resources>

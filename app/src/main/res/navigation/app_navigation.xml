@@ -6,7 +6,7 @@
     app:startDestination="@id/searchFragment">
     <fragment
         android:id="@+id/currentConditionsFragment"
-        android:name="com.example.weatherapp.CurrentConditionsFragment"
+        android:name="com.example.weatherapp.ui.currentConditions.CurrentConditionsFragment"
         android:label="Current Conditions"
         tools:layout="@layout/fragment_current_conditions" >
         <action
@@ -15,21 +15,37 @@
         <argument
             android:name="zipCode"
             app:argType="string"
-            android:defaultValue='"55411"' />
+            android:defaultValue='"zipcode"' />
+        <argument
+            android:name="latitude"
+            app:argType="float"
+            android:defaultValue='123' />
+        <argument
+            android:name="longitude"
+            app:argType="float"
+            android:defaultValue='123' />
     </fragment>
     <fragment
         android:id="@+id/forecastFragment"
-        android:name="com.example.weatherapp.ForecastFragment"
+        android:name="com.example.weatherapp.ui.forecast.ForecastFragment"
         android:label="Forecast"
         tools:layout="@layout/fragment_forecast" >
         <argument
             android:name="zipCode"
             app:argType="string"
             android:defaultValue='"55411"' />
+        <argument
+            android:name="latitude"
+            app:argType="float"
+            android:defaultValue="123" />
+        <argument
+            android:name="longitude"
+            app:argType="float"
+            android:defaultValue="123" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.weatherapp.SearchFragment"
+        android:name="com.example.weatherapp.ui.search.SearchFragment"
         android:label="Search"
         tools:layout="@layout/fragment_search">
         <action
