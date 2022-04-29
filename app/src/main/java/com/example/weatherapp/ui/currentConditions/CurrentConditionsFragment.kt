@@ -12,6 +12,7 @@ import com.example.weatherapp.ui.dialog.ErrorDialogFragment
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentCurrentConditionsBinding
 import com.example.weatherapp.model.CurrentConditions
+import com.example.weatherapp.service.WeatherService
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.HttpException
 import javax.inject.Inject
@@ -21,10 +22,12 @@ class CurrentConditionsFragment : Fragment(R.layout.fragment_current_conditions)
     private val args by navArgs<CurrentConditionsFragmentArgs>()
     private lateinit var binding: FragmentCurrentConditionsBinding
     @Inject lateinit var viewModel: CurrentConditionsViewModel
+    private lateinit var weatherService: WeatherService
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCurrentConditionsBinding.bind(view)
+        weatherService = WeatherService()
         binding.forecastButton.setOnClickListener{
             val action = CurrentConditionsFragmentDirections.actionCurrentConditionsFragmentToForecastFragment(args.zipCode, args.latitude, args.longitude)
             findNavController().navigate(action)
@@ -36,7 +39,7 @@ class CurrentConditionsFragment : Fragment(R.layout.fragment_current_conditions)
         viewModel.currentConditions.observe(this) { currentConditions ->
             bindData(currentConditions)
         }
-        Log.d(TAG, "YM1997-3 Latitude: " + args.latitude + ", Longitude: " + args.longitude)
+        Log.d(TAG, "YM1997-4 Latitude: " + args.latitude + ", Longitude: " + args.longitude)
         try {
             if(args.zipCode.length == 5 && args.zipCode.all { it.isDigit() }) {
                 viewModel.loadData(args.zipCode)
@@ -64,6 +67,8 @@ class CurrentConditionsFragment : Fragment(R.layout.fragment_current_conditions)
                 .load("https://openweathermap.org/img/wn/${it.icon}@2x.png")
                 .into(binding.weatherIcon)
         }
+        weatherService.setData("Temperature: " + binding.temperature.text)
+        Log.d(TAG, "Temperature: " + binding.temperature.text)
     }
 
 }
