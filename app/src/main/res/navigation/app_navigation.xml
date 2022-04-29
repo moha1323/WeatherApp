@@ -4,6 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
     app:startDestination="@id/searchFragment">
+
+    <action android:id="@+id/action_global_currentConditionFragment"
+        app:destination="@+id/currentConditionsFragment"
+        app:launchSingleTop="true"/>
+
     <fragment
         android:id="@+id/currentConditionsFragment"
         android:name="com.example.weatherapp.ui.currentConditions.CurrentConditionsFragment"
