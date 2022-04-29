@@ -14,4 +14,7 @@ object Constants {
     const val NOTIFICATION_CHANNEL_ID = "Weather_Channel"
     const val NOTIFICATION_CHANNEL_NAME = "Weather"
     const val NOTIFICATION_ID = 1
+
+    const val TIMER_UPDATED = "timerUpdated"
+    const val ELAPSED_TIME = "elapsedTime"
 }

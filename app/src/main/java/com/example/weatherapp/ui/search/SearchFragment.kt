@@ -2,10 +2,12 @@ package com.example.weatherapp.ui.search
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.*
 import android.content.ContentValues.TAG
-import android.content.DialogInterface
-import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.text.Editable
@@ -14,13 +16,16 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentSearchBinding
-import com.example.weatherapp.other.Constants.ACTION_START_OR_RESUME_SERVICE
+import com.example.weatherapp.other.Constants.ELAPSED_TIME
+import com.example.weatherapp.other.Constants.NOTIFICATION_CHANNEL_ID
+import com.example.weatherapp.other.Constants.NOTIFICATION_CHANNEL_NAME
 import com.example.weatherapp.other.Constants.REQUEST_CODE_COARSE_LOCATION
 import com.example.weatherapp.other.Constants.manifestLocationPermission
-import com.example.weatherapp.ui.currentConditions.CurrentConditionsFragment
+import com.example.weatherapp.service.NotificationService
 import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -36,6 +41,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private lateinit var locationCallback: LocationCallback
     private var latitude: Float? = null
     private var longitude: Float? = null
+    private var notificationIsActive: Boolean = false
+    private lateinit var serviceIntent: Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +68,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         requireActivity().title = "Search"
         binding = FragmentSearchBinding.bind(view)
         viewModel = SearchViewModel()
-        sendCommandToService()
+        createNotificationChannel()
+        serviceIntent = Intent(requireActivity().applicationContext, NotificationService::class.java)
     }
 
     override fun onResume() {
@@ -136,6 +144,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             latitude = location.latitude.toFloat()
             longitude = location.longitude.toFloat()
             Log.d(TAG,"YM1997-2.0 Latitude: " + latitude + ", Longitude: " + longitude)
+            notificationCondition()
             if(latitude != null && longitude != null) {
                 val action = SearchFragmentDirections.actionSearchFragmentToCurrentConditionsFragment("", latitude!!, longitude!!)
                 findNavController().navigate(action)
@@ -145,10 +154,31 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
     }
 
-    private fun sendCommandToService(){
-        Intent(requireContext(), CurrentConditionsFragment::class.java).also {
-            it.action = ACTION_START_OR_RESUME_SERVICE
-            requireContext().startService(it)
+    private fun notificationCondition(){
+        if (!notificationIsActive){
+            notificationIsActive = true
+            serviceIntent.putExtra(ELAPSED_TIME, 0)
+            requireActivity().startService(serviceIntent)
+            binding.notificationButton.text = getString(R.string.turn_notification_off)
+        } else {
+            notificationIsActive = false
+            requireActivity().stopService(serviceIntent)
+            with(NotificationManagerCompat.from(requireContext())) {
+                cancel(1)
+            }
+            binding.notificationButton.text = getString(R.string.turn_notification_on)
+        }
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, importance).apply {
+                description = "Weather Channel"
+            }
+            val notificationManager: NotificationManager =
+                requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
         }
     }
 }

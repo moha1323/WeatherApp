@@ -1,7 +1,6 @@
 package com.example.weatherapp
 
 import android.content.Intent
-import android.content.pm.LabeledIntent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
