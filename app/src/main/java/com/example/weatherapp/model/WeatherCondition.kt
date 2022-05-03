@@ -6,5 +6,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class WeatherCondition(
     val main: String,
+    val description: String,
     val icon: String
 ) : Parcelable

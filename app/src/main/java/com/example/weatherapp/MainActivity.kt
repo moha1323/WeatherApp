@@ -12,8 +12,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.weatherapp.databinding.ActivityMainBinding
-import com.example.weatherapp.other.Constants.ACTION_SHOW_CURRENT_CONDITIONS_FRAGMENT
-import com.example.weatherapp.other.Constants.REQUEST_CODE_COARSE_LOCATION
+import com.example.weatherapp.util.Constants.ACTION_SHOW_CURRENT_CONDITIONS_FRAGMENT
+import com.example.weatherapp.util.Constants.REQUEST_CODE_COARSE_LOCATION
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

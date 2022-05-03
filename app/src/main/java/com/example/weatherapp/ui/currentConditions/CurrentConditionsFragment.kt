@@ -20,8 +20,9 @@ import com.example.weatherapp.ui.dialog.ErrorDialogFragment
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentCurrentConditionsBinding
 import com.example.weatherapp.model.CurrentConditions
-import com.example.weatherapp.other.Constants
+import com.example.weatherapp.util.Constants
 import com.example.weatherapp.service.NotificationService
+import com.example.weatherapp.util.Constants.DEFAULT_IMAGE
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.HttpException
 import javax.inject.Inject
@@ -55,7 +56,7 @@ class CurrentConditionsFragment : Fragment(R.layout.fragment_current_conditions)
                 viewModel.loadData(args.zipCode)
             } else {
                 viewModel.loadData(args.latitude, args.longitude)
-                sendNotification()
+                sendNotification(args.notificationButton)
             }
         } catch (exception: HttpException){
             if (exception.code().equals(404)){
@@ -80,20 +81,31 @@ class CurrentConditionsFragment : Fragment(R.layout.fragment_current_conditions)
         }
     }
 
-    private fun sendNotification() {
-        val builder = NotificationCompat.Builder(requireContext(),
-            Constants.NOTIFICATION_CHANNEL_ID
-        )
-            .setAutoCancel(false)
-            .setOngoing(true)
-            .setSmallIcon(R.drawable.thousandssunny)
-            .setContentTitle(getString(R.string.notify_location,
-                viewModel.currentConditions.value?.name))
-            .setContentText(getString(R.string.notify_currentTemp,
-                viewModel.currentConditions.value?.main?.temp?.toInt()))
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-        with(NotificationManagerCompat.from(requireContext())) {
-            notify(1, builder.build())
+    private fun sendNotification(notificationButtonPressed: Boolean) {
+        if (notificationButtonPressed) {
+            val builder = NotificationCompat.Builder(
+                requireContext(),
+                Constants.NOTIFICATION_CHANNEL_ID
+            )
+                .setAutoCancel(false)
+                .setOngoing(true)
+                .setSmallIcon(DEFAULT_IMAGE)
+                .setContentTitle(
+                    getString(
+                        R.string.notify_location,
+                        viewModel.currentConditions.value?.name
+                    )
+                )
+                .setContentText(
+                    getString(
+                        R.string.notify_currentTemp,
+                        viewModel.currentConditions.value?.main?.temp?.toInt()
+                    )
+                )
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            with(NotificationManagerCompat.from(requireContext())) {
+                notify(1, builder.build())
+            }
         }
     }
 

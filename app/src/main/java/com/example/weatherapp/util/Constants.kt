@@ -1,6 +1,7 @@
-package com.example.weatherapp.other
+package com.example.weatherapp.util
 
 import android.Manifest
+import com.example.weatherapp.R
 
 object Constants {
     const val manifestLocationPermission : String = Manifest.permission.ACCESS_COARSE_LOCATION
@@ -17,4 +18,6 @@ object Constants {
 
     const val TIMER_UPDATED = "timerUpdated"
     const val ELAPSED_TIME = "elapsedTime"
+
+    const val DEFAULT_IMAGE = R.drawable.thousandssunny
 }

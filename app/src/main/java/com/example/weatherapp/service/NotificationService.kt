@@ -3,8 +3,8 @@ package com.example.weatherapp.service
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import com.example.weatherapp.other.Constants.ELAPSED_TIME
-import com.example.weatherapp.other.Constants.TIMER_UPDATED
+import com.example.weatherapp.util.Constants.ELAPSED_TIME
+import com.example.weatherapp.util.Constants.TIMER_UPDATED
 import java.util.*
 
 class NotificationService : Service() {

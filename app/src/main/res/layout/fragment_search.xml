@@ -37,7 +37,7 @@
         android:id="@+id/notificationButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/notification"
+        android:text="@string/turn_notification_off"
         android:layout_marginTop="30dp"/>
 
 </LinearLayout>

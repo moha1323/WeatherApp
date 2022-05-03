@@ -16,21 +16,26 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentSearchBinding
-import com.example.weatherapp.other.Constants.ELAPSED_TIME
-import com.example.weatherapp.other.Constants.NOTIFICATION_CHANNEL_ID
-import com.example.weatherapp.other.Constants.NOTIFICATION_CHANNEL_NAME
-import com.example.weatherapp.other.Constants.REQUEST_CODE_COARSE_LOCATION
-import com.example.weatherapp.other.Constants.manifestLocationPermission
+import com.example.weatherapp.model.CurrentConditions
+import com.example.weatherapp.util.Constants.ELAPSED_TIME
+import com.example.weatherapp.util.Constants.NOTIFICATION_CHANNEL_ID
+import com.example.weatherapp.util.Constants.NOTIFICATION_CHANNEL_NAME
+import com.example.weatherapp.util.Constants.REQUEST_CODE_COARSE_LOCATION
+import com.example.weatherapp.util.Constants.manifestLocationPermission
 import com.example.weatherapp.service.NotificationService
+import com.example.weatherapp.ui.currentConditions.CurrentConditionsViewModel
+import com.example.weatherapp.util.Constants
 import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchFragment : Fragment(R.layout.fragment_search) {
@@ -43,6 +48,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private var longitude: Float? = null
     private var notificationIsActive: Boolean = false
     private lateinit var serviceIntent: Intent
+    private var notificationButtonPressed: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +76,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         viewModel = SearchViewModel()
         createNotificationChannel()
         serviceIntent = Intent(requireActivity().applicationContext, NotificationService::class.java)
+        notificationCondition()
     }
 
     override fun onResume() {
@@ -106,6 +113,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
 
         binding.notificationButton.setOnClickListener {
+            notificationButtonPressed = true
             if (ActivityCompat.checkSelfPermission(requireContext(), manifestLocationPermission) != PackageManager.PERMISSION_GRANTED){
                 requestPermission()
             } else {
@@ -144,9 +152,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             latitude = location.latitude.toFloat()
             longitude = location.longitude.toFloat()
             Log.d(TAG,"YM1997-2.0 Latitude: " + latitude + ", Longitude: " + longitude)
-            notificationCondition()
+            //notificationCondition()
             if(latitude != null && longitude != null) {
-                val action = SearchFragmentDirections.actionSearchFragmentToCurrentConditionsFragment("", latitude!!, longitude!!)
+                val action = SearchFragmentDirections.actionSearchFragmentToCurrentConditionsFragment("", latitude!!, longitude!!, notificationButtonPressed)
                 findNavController().navigate(action)
             }
         }.addOnFailureListener {
