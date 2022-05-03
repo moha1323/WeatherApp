@@ -3,6 +3,7 @@ package com.example.weatherapp.ui.forecast
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
@@ -36,7 +37,16 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
     }
 
     private fun bindData(forecast: Forecast) {
-        binding.biweeklyForecast.adapter = MyAdapter(forecast.list)
+        var adapter = MyAdapter(forecast.list)
+        binding.biweeklyForecast.adapter = adapter
+        adapter.setOnDayClickListener(object : MyAdapter.OnDayListener{
+            override fun onDayClick(index: Int) {
+                val action = ForecastFragmentDirections.actionForecastFragmentToForecastDetailsFragment(
+                    viewModel.forecast.value!!.list[index])
+                findNavController().navigate(action)
+            }
+
+        })
     }
 
 }

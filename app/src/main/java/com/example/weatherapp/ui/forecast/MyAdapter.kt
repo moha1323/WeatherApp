@@ -15,11 +15,25 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 class MyAdapter(private val data: List<DayForecast>) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+
+    private lateinit var listener: OnDayListener
+
+    fun setOnDayClickListener(dayListener: OnDayListener){
+        listener = dayListener
+    }
+
     @SuppressLint("NewApi")
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View, listener: OnDayListener) : RecyclerView.ViewHolder(view) {
         private val binding = RowDataBinding.bind(view)
         private val dateFormatter = DateTimeFormatter.ofPattern("MMM dd")
         private val timeFormatter = DateTimeFormatter.ofPattern("h:mma")
+
+        init {
+            view.setOnClickListener {
+                listener.onDayClick(absoluteAdapterPosition)
+            }
+        }
+
         fun bind(data: DayForecast) {
             val dateTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(data.dt), ZoneId.systemDefault())
             val sunrise = LocalDateTime.ofInstant(Instant.ofEpochSecond(data.sunrise), ZoneId.systemDefault())
@@ -40,7 +54,7 @@ class MyAdapter(private val data: List<DayForecast>) : RecyclerView.Adapter<MyAd
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.row_data, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view, listener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -48,5 +62,9 @@ class MyAdapter(private val data: List<DayForecast>) : RecyclerView.Adapter<MyAd
     }
 
     override fun getItemCount() = data.size
+
+    interface OnDayListener{
+        fun onDayClick(index : Int)
+    }
 
 }

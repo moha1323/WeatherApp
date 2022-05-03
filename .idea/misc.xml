@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/layout/fragment_current_conditions.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_current_conditions3.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/fragment_forecast.xml" value="0.1526268115942029" />
+        <entry key="app/src/main/res/layout/fragment_forecast_details.xml" value="0.213768115942029" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.22" />
         <entry key="app/src/main/res/layout/row_data.xml" value="0.33" />
       </map>

@@ -33,4 +33,11 @@
         android:text="@string/location"
         android:layout_marginTop="30dp"/>
 
+    <Button
+        android:id="@+id/notificationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/turn_notification_off"
+        android:layout_marginTop="30dp"/>
+
 </LinearLayout>

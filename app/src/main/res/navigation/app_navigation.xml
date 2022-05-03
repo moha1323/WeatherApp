@@ -4,11 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
     app:startDestination="@id/searchFragment">
+
+    <action android:id="@+id/action_global_currentConditionFragment"
+        app:destination="@+id/currentConditionsFragment"
+        app:launchSingleTop="true"/>
+
     <fragment
         android:id="@+id/currentConditionsFragment"
         android:name="com.example.weatherapp.ui.currentConditions.CurrentConditionsFragment"
         android:label="Current Conditions"
-        tools:layout="@layout/fragment_current_conditions" >
+        tools:layout="@layout/fragment_current_conditions"
+        app:launchSingleTop="true">
         <action
             android:id="@+id/action_currentConditionsFragment_to_forecastFragment"
             app:destination="@id/forecastFragment" />
@@ -24,12 +30,17 @@
             android:name="longitude"
             app:argType="float"
             android:defaultValue='123' />
+        <argument
+            android:name="notificationButton"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/forecastFragment"
         android:name="com.example.weatherapp.ui.forecast.ForecastFragment"
         android:label="Forecast"
-        tools:layout="@layout/fragment_forecast" >
+        tools:layout="@layout/fragment_forecast"
+        app:launchSingleTop="true">
         <argument
             android:name="zipCode"
             app:argType="string"
@@ -42,14 +53,27 @@
             android:name="longitude"
             app:argType="float"
             android:defaultValue="123" />
+        <action
+            android:id="@+id/action_forecastFragment_to_forecastDetailsFragment"
+            app:destination="@id/forecastDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.weatherapp.ui.search.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search">
+        tools:layout="@layout/fragment_search"
+        app:launchSingleTop="true">
         <action
             android:id="@+id/action_searchFragment_to_currentConditionsFragment"
             app:destination="@id/currentConditionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forecastDetailsFragment"
+        android:name="com.example.weatherapp.ui.forecast.ForecastDetailsFragment"
+        android:label="Forecast Details"
+        app:launchSingleTop="true">
+        <argument
+            android:name="dayForecast"
+            app:argType="com.example.weatherapp.model.DayForecast" />
     </fragment>
 </navigation>
